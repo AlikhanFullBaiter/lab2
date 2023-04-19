@@ -1,28 +1,32 @@
 package src;
 
 public class MyLinkedList<E> implements MyList<E> {
-    private Node head;
-    private Node tail;
-    private int size;
-
-    private class Node {
-        private E element;
-        private Node next;
-        private Node prev;
-
-        public Node(E element, Node next, Node prev) {
+    private class Node<E> {
+        E element;
+        Node<E> next;
+        Node<E> prev;
+        Node(E element, Node<E> next, Node<E> prev) {
             this.element = element;
             this.next = next;
             this.prev = prev;
         }
     }
+    private Node<E> head;
+    private Node<E> tail;
+    private int size;
 
-    MyLinkedList () {
+    public MyLinkedList() {
         this.head = null;
         this.tail = null;
         size = 0;
     }
 
+
+    public void checkIndex(int index) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
     @Override
     public int size() {
         return size;
@@ -45,12 +49,36 @@ public class MyLinkedList<E> implements MyList<E> {
 
     @Override
     public void add(E item) {
-
+        Node node = new Node(item, tail, null);
+        if (tail != null) {
+            tail.next = node;
+        } else {
+            head = node;
+        }
+        tail = node;
+        size++;
     }
 
     @Override
-    public void add(E item, int index) {
-
+    public void add(Object item, int index) {
+        checkIndex(index);
+        Node<E> newNode = new Node<E>((E) item, null, null);
+        if (index == 0) {
+            add((E) item);
+            return;
+        }
+        Node<E> node = head;
+        for (int i = 1; i <= size; i++) {
+            if (i == index) {
+                Node<E> temp = node.next;
+                node.next = newNode;
+                newNode.prev = node;
+                newNode.next = temp;
+                temp.prev = newNode;
+            }
+            node = node.next;
+        }
+        size++;
     }
 
     @Override
