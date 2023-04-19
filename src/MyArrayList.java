@@ -46,12 +46,17 @@ public class MyArrayList<T> implements MyList<T> {
     public boolean remove(T item) {
         for (int i = 0; i < size; i++) {
             if (arr[i].equals(item)) {
-                remove(i);
+                for (int j = i + 1; j < size; j++) {
+                    arr[j - 1] = arr[j];
+                }
+                arr[size - 1] = null;
+                size--;
                 return true;
             }
         }
         return false;
     }
+
 
     public T remove(int index) {
         checkIndex(index);
