@@ -48,14 +48,17 @@ public class MyLinkedList<E> implements MyList<E> {
     }
 
     @Override
-    public void add(E item) {
-        Node node = new Node(item, tail, null);
-        if (tail != null) {
-            tail.next = node;
-        } else {
-            head = node;
+    public void add(Object item) {
+        Node<E> newNode = new Node<E>((E) item, null, null);
+        if (head == null) {
+            head = newNode;
+            tail = head;
         }
-        tail = node;
+        else {
+            newNode.prev = tail;
+            tail.next = newNode;
+            tail = newNode;
+        }
         size++;
     }
 
@@ -64,7 +67,7 @@ public class MyLinkedList<E> implements MyList<E> {
         checkIndex(index);
         Node<E> newNode = new Node<E>((E) item, null, null);
         if (index == 0) {
-            add((E) item);
+            add(item);
             return;
         }
         Node<E> node = head;
@@ -208,5 +211,13 @@ public class MyLinkedList<E> implements MyList<E> {
 
     }
 
+    public void printList() {
+        Node<E> current = head;
+        while (current != null) {
+            System.out.print(current.element + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
 
 }
