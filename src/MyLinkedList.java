@@ -149,14 +149,28 @@ public class MyLinkedList<E> implements MyList<E> {
 
     @Override
     public void clear() {
-
+        this.head = null;
+        this.tail = null;
+        size = 0;
     }
 
     @Override
     public E get(int index) {
+        checkIndex(index);
+        if (index == 0) {
+            return head.element;
+        }
+
+        Node<E> newNode = head.next;
+        for (int i = 1; i <= size; i++) {
+            if (i == index) {
+                return newNode.element;
+            }
+            newNode = newNode.next;
+        }
+
         return null;
     }
-
     @Override
     public int indexOf(Object o) {
         return 0;
