@@ -64,7 +64,7 @@ public class MyArrayList<T> implements MyList<T> {
         for (int i = index + 1; i < size; i++) {
             arr[i - 1] = arr[i];
         }
-        arr[--size] = null;
+        arr[size-1] = null;
         return item;
     }
 
