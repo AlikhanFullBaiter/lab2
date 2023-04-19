@@ -547,10 +547,7 @@ public class MyLinkedList<E> implements MyList<E> {
         return -1;
     }
 
-    @Override
-    public void sort() {
-
-    }
+   
 
     public void printList() {
         Node<E> current = head;
