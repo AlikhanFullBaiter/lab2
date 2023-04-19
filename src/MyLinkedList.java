@@ -173,12 +173,34 @@ public class MyLinkedList<E> implements MyList<E> {
     }
     @Override
     public int indexOf(Object o) {
-        return 0;
+        Node<E> newNode = new Node<E>((E) o, null, null);
+        if (head.element == newNode.element) {
+            return 0;
+        }
+        Node<E> node = head.next;
+        for (int i = 1; i <= size; i++) {
+            if (node.element == newNode.element) {
+                return i;
+            }
+            node = node.next;
+        }
+        return -1;
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
+        Node<E> newNode = new Node<E>((E) o, null, null);
+        if (tail.element == newNode.element) {
+            return size-1;
+        }
+        Node<E> node = tail.prev;
+        for (int i = size-1; i >= 1; i--) {
+            if (node.element == newNode.element) {
+                return i;
+            }
+            node = node.prev;
+        }
+        return -1;
     }
 
     @Override
