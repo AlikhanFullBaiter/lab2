@@ -8,6 +8,5 @@ public class main {
         array.add("se-2217" , 1);
         array.remove(1);
         array.printList();
-        array.indexOf("Alikhan");
     }
 }
